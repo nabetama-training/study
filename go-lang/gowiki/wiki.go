@@ -1,13 +1,8 @@
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"log"
-	"net/http"
-	"os"
-	"path/filepath"
-)
+import "io/ioutil"
+import "fmt"
+import "net/http"
 
 type Page struct {
 	Title string
@@ -25,25 +20,12 @@ func loadPage(title string) (*Page, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Page{
-		Title: title,
-		Body:  body,
-	}, nil
-}
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	return &Page{Title: title, Body: body}, nil
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal("Error: ", err)
-	}
-	title := r.URL.Path[len("/view"):]
-	p, err := loadPage(filepath.Join(dir, title))
-	if err != nil {
-		log.Fatal("Error: ", err)
-	}
+	title := r.URL.Path[len("/view/"):]
+	p, _ := loadPage(title)
 	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
 }
 
