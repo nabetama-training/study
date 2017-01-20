@@ -1,0 +1,1 @@
+test.txt@/Users/nabetama/dev/src/github.com/nabetama-training/study/go-lang/gowiki
