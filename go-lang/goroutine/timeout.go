@@ -1,5 +1,5 @@
 // チャンネルをタイムアウトさせる方法
-// 1.7.1?以降はcontextで行うのがナウいっぽい
+// 1.7.1?以降はcontextで行う
 package main
 
 import (
